@@ -19,7 +19,7 @@
       <img src="medblocks-ui-logo.png" class="w-6 h-8" alt="" />
       <h1 class="text-2xl font-medium text-gray-700">Medblocks Forms</h1>
     </span>
-    <sl-button type="neutral">
+    <sl-button type="neutral" href="https://github.com/medblocks/all-forms" target="_blank">
       <sl-icon slot="suffix" name="github" />
       Github
     </sl-button>
