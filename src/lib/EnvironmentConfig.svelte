@@ -11,7 +11,7 @@
             username = "",
             password = "",
             ehrId = "",
-        } = JSON.parse(localStorage.getItem(key)));
+        } = JSON.parse(localStorage.getItem(key)) ?? {});
     });
     const save = () => {
         try {
@@ -56,8 +56,8 @@
                 }}
                 value={ehrId}
                 placeholder="eg: 123e4567-e89b-12d3-a456-426652340000"
-                />
-            
+            />
+
             <p class="text-lg mt-3 text-gray-600">Basic Authentication</p>
             <sl-input
                 label="Username"
