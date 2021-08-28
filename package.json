@@ -20,5 +20,9 @@
     "tslib": "^2.2.0",
     "typescript": "^4.3.2",
     "vite": "^2.5.1"
+  },
+  "dependencies": {
+    "medblocks-ui": "^0.0.54",
+    "svelte-routing": "^1.6.0"
   }
 }

@@ -1,66 +1,36 @@
 <script lang="ts">
-  import logo from './assets/svelte.png'
-  import Counter from './lib/Counter.svelte'
-  import './index.css'
+  import "./index.css";
+  import "medblocks-ui";
+  import { Router, Route } from "svelte-routing";
+  import "@shoelace-style/shoelace/dist/themes/light.css";
+  import "@shoelace-style/shoelace/dist/shoelace";
+  import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path";
+  import Home from "./lib/Home.svelte";
+  import { forms } from "./lib/FormList.svelte";
+  // Load icons directly from shoelace CDN
+  setBasePath(
+    "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.49/dist/"
+  );
 </script>
 
-<main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello Typescript!</h1>
-
-  <Counter />
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p class="text-green-500">
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
+<main class="p-2 md:p-12 flex flex-col gap-5">
+  <div class="flex justify-between">
+    <span class="flex gap-3">
+      <img src="medblocks-ui-logo.png" class="w-6 h-8" alt="" />
+      <h1 class="text-2xl font-medium text-gray-700">Medblocks Forms</h1>
+    </span>
+    <sl-button type="neutral">
+      <sl-icon slot="suffix" name="github" />
+      Github
+    </sl-button>
+  </div>
+  <Router>
+    <Route path="/"><Home /></Route>
+    {#each forms as form}
+      <Route path={form.url} component={form.component} />
+    {/each}
+  </Router>
 </main>
 
 <style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-  main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
-  }
-
-  img {
-    height: 16rem;
-    width: 16rem;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
-  }
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
-    }
-
-    p {
-      max-width: none;
-    }
-  }
 </style>
