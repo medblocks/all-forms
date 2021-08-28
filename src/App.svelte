@@ -13,7 +13,7 @@
   );
 </script>
 
-<main class="p-2 md:p-12 flex flex-col gap-5">
+<main class="p-5 md:p-12 flex flex-col gap-5">
   <div class="flex justify-between">
     <span class="flex gap-3">
       <img src="medblocks-ui-logo.png" class="w-6 h-8" alt="" />
