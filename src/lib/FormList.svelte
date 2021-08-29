@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+    import { Link } from "svelte-routing";
     import AnotherForm from "./forms/AnotherForm.svelte";
     import ExampleForm from "./forms/ExampleForm.svelte";
     export const forms = [
@@ -20,7 +21,7 @@
 <div>
     {#each forms as form}
         <div class="bg-gray-100 flex p-3 m-3 border justify-between rounded-md">
-            <a class="font-medium" href={form.url}>{form.name} </a>
+            <Link class="font-medium" to={form.url}>{form.name}</Link>
             <sl-tooltip content="Download Template">
                 <sl-icon-button
                     download
