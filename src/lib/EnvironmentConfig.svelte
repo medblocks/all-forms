@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { store } from "./localStore";
-    const key = "env";
     let openehr, ehrscape, username, password, ehrId;
     let success, failure;
     onMount(() => {
