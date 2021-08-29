@@ -38,6 +38,14 @@
             <mb-option value="at0067" label="Resolved"></mb-option>
             <mb-option value="at0066" label="Refuted"></mb-option>
         </mb-select>
+        <mb-text-select path="pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:0/reaction_event:0/manifestation:0" label="Manifestation">
+            <mb-option value="Rash" label="Rash"></mb-option>
+            <mb-option value="Itching" label="Itching"></mb-option>
+            <mb-option value="Sneezing" label="Sneezing"></mb-option>
+            <mb-option value="Watering of eyes" label="Watering of eyes"></mb-option>
+            <mb-option value="Breathing difficulty" label="Breathing difficulty"></mb-option>
+            <mb-option value="Anaphylaxis" label="Anaphylaxis"></mb-option>
+        </mb-text-select>
         <mb-date time class="mt-6" path="pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:0/onset_of_last_reaction" label="Onset of last reaction"></mb-date>
         <mb-select path="pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:0/reaction_event:0/severity_of_reaction" label="Severity of reaction">
             <mb-option value="at0093" label="Mild"></mb-option>
