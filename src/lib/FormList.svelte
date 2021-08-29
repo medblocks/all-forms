@@ -1,12 +1,12 @@
 <script lang="ts" context="module">
     import { Link } from "svelte-routing";
     import AnotherForm from "./forms/AnotherForm.svelte";
-    import ExampleForm from "./forms/ExampleForm.svelte";
+    import Allergy from "./forms/Allergy.svelte";
     export const forms = [
         {
-            name: "Example Form",
-            url: "example",
-            component: ExampleForm,
+            name: "Allergy",
+            url: "allergy",
+            component: Allergy,
             opt: "example.opt",
         },
         {

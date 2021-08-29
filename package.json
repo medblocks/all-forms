@@ -15,13 +15,14 @@
     "postcss": "^8.3.6",
     "svelte": "^3.37.0",
     "svelte-check": "^2.1.0",
-    "svelte-preprocess": "^4.7.2",
+    "svelte-preprocess": "^4.8.0",
     "tailwindcss": "^2.2.8",
     "tslib": "^2.2.0",
     "typescript": "^4.3.2",
     "vite": "^2.5.1"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "medblocks-ui": "^0.0.54",
     "svelte-routing": "^1.6.0"
   }
