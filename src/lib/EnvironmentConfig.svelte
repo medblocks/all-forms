@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { store } from "./localStore";
     const key = "env";
     let openehr, ehrscape, username, password, ehrId;
     let success, failure;
@@ -11,14 +12,11 @@
             username = "",
             password = "",
             ehrId = "",
-        } = JSON.parse(localStorage.getItem(key)) ?? {});
+        } = JSON.parse($store) ?? {});
     });
     const save = () => {
         try {
-            localStorage.setItem(
-                key,
-                JSON.stringify({ openehr, ehrscape, username, password, ehrId })
-            );
+            store.setLocal(JSON.stringify({ openehr, ehrscape, username, password, ehrId }))
             success.toast();
         } catch (e) {
             failure.toast();
@@ -27,7 +25,7 @@
     };
 </script>
 
-<div class="">
+<div>
     <p class="text-2xl text-gray-600 mb-3">Environment Variables</p>
     <sl-form on:sl-submit|preventDefault={save}>
         <div class="flex flex-col gap-3 shadow-lg border-t p-6 rounded-lg">
