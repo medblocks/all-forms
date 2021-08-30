@@ -5,13 +5,13 @@
     export const forms = [
         {
             name: "Allergy",
-            url: "allergy",
+            id: "pdjallergy.vo",
             component: Allergy,
             opt: "example.opt",
         },
         {
             name: "Another Form",
-            url: "another",
+            id: "another",
             component: AnotherForm,
             opt: "example.opt",
         },
@@ -21,7 +21,7 @@
 <div>
     {#each forms as form}
         <div class="bg-gray-100 flex p-3 m-3 border justify-between rounded-md">
-            <Link class="font-medium" to={form.url}>{form.name}</Link>
+            <Link class="font-medium" to={form.id}>{form.name}</Link>
             <sl-tooltip content="Download Template">
                 <sl-icon-button
                     download

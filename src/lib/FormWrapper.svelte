@@ -1,22 +1,44 @@
 <script lang="ts">
+    import axios from "axios";
+    import { store } from "./localStore";
+
     export let component;
+    export let name;
+    export let id;
 
     let loading = false;
     let success;
     let failure;
+
     const handleSubmit = async (e: CustomEvent) => {
-        // TODO: Implement axios and make request to services
-        console.log(e.detail);
-        success.toast();
+        const composition = e.detail;
+        console.log({ composition });
+        try {
+            const config = JSON.parse($store);
+            const { ehrscape: baseURL, username, password, ehrId } = config;
+            const ehrscape = axios.create({
+                baseURL,
+                auth: { username, password },
+            });
+            const response = await ehrscape.post("/composition", composition, {
+                params: { format: "FLAT", templateId: id, ehrId },
+            });
+            console.log(response.data);
+            success.toast();
+        } catch (e) {
+            console.error(e);
+            failure.toast();
+        }
     };
 </script>
 
-<div>
-    <svelte:component this={component} {loading} on:mb-submit={handleSubmit} />
+<div on:mb-submit={handleSubmit}>
+    <h1 class="text-xl">{name}</h1>
+    <svelte:component this={component} {loading} />
     <sl-alert bind:this={success} type="success" duration="3000" closable>
         <sl-icon slot="icon" name="check2-circle" />
-        <strong>Your Composition has been persisted!</strong><br />
-        Response from the CDR was 201
+        <strong>Your form has been submitted</strong><br />
+        Composition created in CDR!
     </sl-alert>
     <sl-alert bind:this={failure} type="danger" duration="3000" closable>
         <sl-icon slot="icon" name="exclamation-octagon" />
