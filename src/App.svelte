@@ -32,7 +32,7 @@
   <Router>
     <Route path="/"><Home /></Route>
     {#each forms as form}
-      <Route path={form.name}>
+      <Route path={form.name.replaceAll(" ", "_")}>
         <FormWrapper id={form.id} component={form.component} name={form.name} />
       </Route>
     {/each}

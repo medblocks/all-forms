@@ -26,7 +26,7 @@
 <div>
     {#each forms as form}
         <div class="bg-gray-100 flex p-3 m-3 border justify-between rounded-md">
-            <Link class="font-medium" to={form.name}>{form.name}</Link>
+            <Link class="font-medium" to={form.name.replaceAll(' ', '_')}>{form.name}</Link>
             <sl-tooltip content="Download Template">
                 <sl-icon-button
                     download
