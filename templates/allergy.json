@@ -1,0 +1,496 @@
+{
+    "templateId": "pdjallergy.vo",
+    "version": "2.3",
+    "defaultLanguage": "en",
+    "languages": [
+    "en"
+    ],
+    "tree": {
+    "id": "pdjallergy.v0",
+    "name": "pdjallergy.v0",
+    "localizedName": "pdjallergy.v0",
+    "rmType": "COMPOSITION",
+    "nodeId": "openEHR-EHR-COMPOSITION.encounter.v1",
+    "min": 1,
+    "max": 1,
+    "localizedNames": {
+        "en": "pdjallergy.v0"
+    },
+    "localizedDescriptions": {
+        "en": "Interaction, contact or care event between a subject of care and healthcare provider(s)."
+    },
+    "aqlPath": "",
+    "children": [
+        {
+        "id": "category",
+        "name": "category",
+        "localizedName": "category",
+        "rmType": "DV_CODED_TEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/category",
+        "inputs": [
+            {
+            "suffix": "code",
+            "type": "CODED_TEXT",
+            "list": [
+                {
+                "value": "433",
+                "label": "event",
+                "localizedLabels": {
+                    "en": "event"
+                }
+                }
+            ],
+            "terminology": "openehr"
+            }
+        ],
+        "inContext": true
+        },
+        {
+        "id": "context",
+        "name": "context",
+        "localizedName": "context",
+        "rmType": "EVENT_CONTEXT",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/context",
+        "children": [
+            {
+            "id": "start_time",
+            "name": "start_time",
+            "rmType": "DV_DATE_TIME",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/start_time",
+            "inputs": [
+                {
+                "type": "DATETIME"
+                }
+            ],
+            "inContext": true
+            },
+            {
+            "id": "setting",
+            "name": "setting",
+            "rmType": "DV_CODED_TEXT",
+            "min": 1,
+            "max": 1,
+            "aqlPath": "/context/setting",
+            "inputs": [
+                {
+                "suffix": "code",
+                "type": "TEXT"
+                },
+                {
+                "suffix": "value",
+                "type": "TEXT"
+                }
+            ],
+            "inContext": true
+            }
+        ]
+        },
+        {
+        "id": "adverse_reaction_list",
+        "name": "Adverse reaction list",
+        "localizedName": "Adverse reaction list",
+        "rmType": "SECTION",
+        "nodeId": "openEHR-EHR-SECTION.adverse_reaction_list.v0",
+        "min": 0,
+        "max": 1,
+        "localizedNames": {
+            "en": "Adverse reaction list"
+        },
+        "localizedDescriptions": {
+            "en": "Framework for consistent modelling of content within a template for an Adverse reaction list."
+        },
+        "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]",
+        "children": [
+            {
+            "id": "adverse_reaction_risk",
+            "name": "Adverse reaction risk",
+            "localizedName": "Adverse reaction risk",
+            "rmType": "EVALUATION",
+            "nodeId": "openEHR-EHR-EVALUATION.adverse_reaction_risk.v1",
+            "min": 0,
+            "max": -1,
+            "localizedNames": {
+                "en": "Adverse reaction risk"
+            },
+            "localizedDescriptions": {
+                "en": "Risk of harmful or undesirable physiological response which is unique to an individual and associated with exposure to a substance."
+            },
+            "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]",
+            "children": [
+                {
+                "id": "substance",
+                "name": "Substance",
+                "localizedName": "Substance",
+                "rmType": "DV_TEXT",
+                "min": 1,
+                "max": 1,
+                "localizedNames": {
+                    "en": "Substance"
+                },
+                "localizedDescriptions": {
+                    "en": "Identification of a substance, or substance class, that is considered to put the individual at risk of an adverse reaction event."
+                },
+                "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]/data[at0001]/items[at0002]/value",
+                "inputs": [
+                    {
+                    "type": "TEXT"
+                    }
+                ],
+                "annotations": {
+                    "comment": "Both an individual substance and a substance class are valid entries in 'Substance'. A substance may be a compound of simpler substances, for example a medicinal product. If the value in 'Substance' is an individual substance, it may be duplicated in 'Specific substance'. It is strongly recommended that both 'Substance' and 'Specific substance' be coded with a terminology capable of triggering decision support, where possible. For example: Snomed CT, DM+D, RxNorm, NDFRT, ATC, New Zealand Universal List of Medicines and Australian Medicines Terminology. Free text entry should only be used if there is no appropriate terminology available."
+                }
+                },
+                {
+                "id": "status",
+                "name": "Status",
+                "localizedName": "Status",
+                "rmType": "DV_CODED_TEXT",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                    "en": "Status"
+                },
+                "localizedDescriptions": {
+                    "en": "Assertion about the certainty of the propensity, or potential future risk, of the identified 'Substance' to cause a reaction."
+                },
+                "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]/data[at0001]/items[at0063]/value",
+                "inputs": [
+                    {
+                    "suffix": "code",
+                    "type": "CODED_TEXT",
+                    "list": [
+                        {
+                        "value": "at0127",
+                        "label": "Suspected",
+                        "localizedLabels": {
+                            "en": "Suspected"
+                        },
+                        "localizedDescriptions": {
+                            "en": "A low level of clinical certainty about the propensity of a reaction to the identified 'Substance'."
+                        }
+                        },
+                        {
+                        "value": "at0064",
+                        "label": "Likely",
+                        "localizedLabels": {
+                            "en": "Likely"
+                        },
+                        "localizedDescriptions": {
+                            "en": "A reasonable level of certainty about the propensity for a reaction to the identified 'Substance'."
+                        }
+                        },
+                        {
+                        "value": "at0065",
+                        "label": "Confirmed",
+                        "localizedLabels": {
+                            "en": "Confirmed"
+                        },
+                        "localizedDescriptions": {
+                            "en": "A high level of certainty about the propensity for a reaction to the identified 'Substance', which may include clinical evidence by testing or re-challenge."
+                        }
+                        },
+                        {
+                        "value": "at0067",
+                        "label": "Resolved",
+                        "localizedLabels": {
+                            "en": "Resolved"
+                        },
+                        "localizedDescriptions": {
+                            "en": "The previously known reaction to the identified 'Substance' has been clinically reassessed and considered no longer to be an active risk."
+                        }
+                        },
+                        {
+                        "value": "at0066",
+                        "label": "Refuted",
+                        "localizedLabels": {
+                            "en": "Refuted"
+                        },
+                        "localizedDescriptions": {
+                            "en": "The propensity for a reaction to the identified 'Substance' has been clinically reassessed or has been disproved with a high level of clinical certainty by re-exposure or deliberate challenge."
+                        }
+                        }
+                    ],
+                    "terminology": "local"
+                    }
+                ],
+                "annotations": {
+                    "comment": "Decision support would typically raise alerts for 'Suspected', 'Likely', 'Confirmed', and ignore a 'Refuted' reaction. Clinical systems may choose not to display Adverse reaction entries with a \r\n\r\n\r\n'Refuted' status in the Adverse Reaction List. \r\n\r\nHowever, 'Refuted' may be useful for reconciliation of the adverse reaction list or when communicating between systems\r\n\r\n. Some implementations may choose to make this field mandatory.\r\n 'Resolved' may be used variably across systems, depending on clinical use and context - there appears to be differing opinion whether this should still be used to raise potential alerts or to display in an Adverse Reaction List. The free text data type will allow for local variation by enabling other value sets to be applied to this data element in a template - in this situation it is recommended that values should be coded using a terminology."
+                }
+                },
+                {
+                "id": "onset_of_last_reaction",
+                "name": "Onset of last reaction",
+                "localizedName": "Onset of last reaction",
+                "rmType": "DV_DATE_TIME",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                    "en": "Onset of last reaction"
+                },
+                "localizedDescriptions": {
+                    "en": "The date and/or time of the onset of the last known occurrence of a reaction event."
+                },
+                "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]/data[at0001]/items[at0117]/value",
+                "inputs": [
+                    {
+                    "type": "DATETIME"
+                    }
+                ],
+                "annotations": {
+                    "comment": "This date may be be a duplicate of the most recent 'Onset of reaction' date.\r\n Where a textual representation of the date of last occurrence is required e.g 'In Childhood, '10 years ago' the Comment element should be used."
+                }
+                },
+                {
+                "id": "comment",
+                "name": "Comment",
+                "localizedName": "Comment",
+                "rmType": "DV_TEXT",
+                "min": 0,
+                "max": 1,
+                "localizedNames": {
+                    "en": "Comment"
+                },
+                "localizedDescriptions": {
+                    "en": "Additional narrative about the propensity for the adverse reaction, not captured in other fields."
+                },
+                "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]/data[at0001]/items[at0006]/value",
+                "inputs": [
+                    {
+                    "type": "TEXT"
+                    }
+                ],
+                "annotations": {
+                    "comment": "For example: including reason for flagging a 'Criticality' of 'High risk'; and instructions related to future exposure or administration of the Substance, such as administration within an Intensive Care Unit or under corticosteroid cover."
+                }
+                },
+                {
+                "id": "reaction_event",
+                "name": "Reaction event",
+                "localizedName": "Reaction event",
+                "rmType": "CLUSTER",
+                "nodeId": "at0009",
+                "min": 0,
+                "max": -1,
+                "localizedNames": {
+                    "en": "Reaction event"
+                },
+                "localizedDescriptions": {
+                    "en": "Details about each adverse reaction event linked to exposure to the identified 'Substance'."
+                },
+                "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]/data[at0001]/items[at0009]",
+                "children": [
+                    {
+                    "id": "manifestation",
+                    "name": "Manifestation",
+                    "localizedName": "Manifestation",
+                    "rmType": "DV_TEXT",
+                    "min": 0,
+                    "max": -1,
+                    "localizedNames": {
+                        "en": "Manifestation"
+                    },
+                    "localizedDescriptions": {
+                        "en": "Clinical symptoms and/or signs that are observed or associated with the adverse reaction."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]/data[at0001]/items[at0009]/items[at0011]/value",
+                    "inputs": [
+                        {
+                        "type": "TEXT",
+                        "list": [
+                            {
+                            "value": "Rash",
+                            "label": "Rash"
+                            },
+                            {
+                            "value": "Itching",
+                            "label": "Itching"
+                            },
+                            {
+                            "value": "Sneezing",
+                            "label": "Sneezing"
+                            },
+                            {
+                            "value": "Watering of eyes",
+                            "label": "Watering of eyes"
+                            },
+                            {
+                            "value": "Breathing difficulty",
+                            "label": "Breathing difficulty"
+                            },
+                            {
+                            "value": "Anaphylaxis",
+                            "label": "Anaphylaxis"
+                            }
+                        ],
+                        "listOpen": false
+                        }
+                    ],
+                    "annotations": {
+                        "comment": "Manifestation can be expressed as a single word, phrase or brief description. For example: nausea, rash.  'No reaction'may be appropriate where a previous reaction has been noted but the reaction did not re-occur after further exposure. It is preferable that 'Manifestation' should be coded with a terminology, where possible. The values entered here may be used to display on an application screen as part of a list of adverse reactions, as recommended in the UK NHS CUI guidelines.\r\n\r\n\r\n\r\nTerminologies commonly used include, but are not limited to, SNOMED-CT or ICD10."
+                    }
+                    },
+                    {
+                    "id": "severity_of_reaction",
+                    "name": "Severity of reaction",
+                    "localizedName": "Severity of reaction",
+                    "rmType": "DV_CODED_TEXT",
+                    "min": 0,
+                    "max": 1,
+                    "localizedNames": {
+                        "en": "Severity of reaction"
+                    },
+                    "localizedDescriptions": {
+                        "en": "Clinical assessment of the severity of the reaction event as a whole, potentially considering multiple different manifestations."
+                    },
+                    "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]/data[at0001]/items[at0009]/items[at0089]/value",
+                    "inputs": [
+                        {
+                        "suffix": "code",
+                        "type": "CODED_TEXT",
+                        "list": [
+                            {
+                            "value": "at0093",
+                            "label": "Mild",
+                            "localizedLabels": {
+                                "en": "Mild"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Causes mild physiological effects."
+                            }
+                            },
+                            {
+                            "value": "at0092",
+                            "label": "Moderate",
+                            "localizedLabels": {
+                                "en": "Moderate"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Causes moderate physiological effects."
+                            }
+                            },
+                            {
+                            "value": "at0090",
+                            "label": "Severe",
+                            "localizedLabels": {
+                                "en": "Severe"
+                            },
+                            "localizedDescriptions": {
+                                "en": "Causes severe physiological effects."
+                            }
+                            }
+                        ],
+                        "terminology": "local"
+                        }
+                    ],
+                    "annotations": {
+                        "comment": "It is acknowledged that this assessment is very subjective. There may be some some specific practice domains where objective scales have been applied.\r\n Objective scales can be included in this model using the 'Reaction details' Cluster."
+                    }
+                    }
+                ]
+                },
+                {
+                "id": "subject",
+                "name": "subject",
+                "rmType": "PARTY_PROXY",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]/subject",
+                "inputs": [
+                    {
+                    "suffix": "id",
+                    "type": "TEXT"
+                    },
+                    {
+                    "suffix": "id_scheme",
+                    "type": "TEXT"
+                    },
+                    {
+                    "suffix": "id_namespace",
+                    "type": "TEXT"
+                    },
+                    {
+                    "suffix": "name",
+                    "type": "TEXT"
+                    }
+                ],
+                "inContext": true
+                },
+                {
+                "id": "language",
+                "name": "language",
+                "rmType": "CODE_PHRASE",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]/language",
+                "inContext": true
+                },
+                {
+                "id": "encoding",
+                "name": "encoding",
+                "rmType": "CODE_PHRASE",
+                "min": 1,
+                "max": 1,
+                "aqlPath": "/content[openEHR-EHR-SECTION.adverse_reaction_list.v0]/items[openEHR-EHR-EVALUATION.adverse_reaction_risk.v1]/encoding",
+                "inContext": true
+                }
+            ],
+            "annotations": {
+                "comment": "Substances include, but are not limited to: a therapeutic substance administered correctly at an appropriate dosage for the individual; food; material derived from plants or animals; or venom from insect stings."
+            }
+            }
+        ]
+        },
+        {
+        "id": "composer",
+        "name": "composer",
+        "rmType": "PARTY_PROXY",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/composer",
+        "inputs": [
+            {
+            "suffix": "id",
+            "type": "TEXT"
+            },
+            {
+            "suffix": "id_scheme",
+            "type": "TEXT"
+            },
+            {
+            "suffix": "id_namespace",
+            "type": "TEXT"
+            },
+            {
+            "suffix": "name",
+            "type": "TEXT"
+            }
+        ],
+        "inContext": true
+        },
+        {
+        "id": "language",
+        "name": "language",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/language",
+        "inContext": true
+        },
+        {
+        "id": "territory",
+        "name": "territory",
+        "rmType": "CODE_PHRASE",
+        "min": 1,
+        "max": 1,
+        "aqlPath": "/territory",
+        "inContext": true
+        }
+    ]
+    }
+}
