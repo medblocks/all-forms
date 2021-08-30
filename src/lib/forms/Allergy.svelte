@@ -1,6 +1,7 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
     export let loading;
+
     let substance = {}
     let risks = 1;
 
@@ -63,7 +64,7 @@
                 label="Comment"
             />
        
-        {/if}
+{/if}
         <div class="hidden">
             <mb-context path="pdjallergy.v0/category" />
             <mb-context path="pdjallergy.v0/context/start_time" />
@@ -80,14 +81,18 @@
         </div>
     </div>
     {/each}
+
     <sl-button type="primary" class="mt-5" on:click={()=>{risks++;}}><sl-icon slot="prefix" name="plus-square-fill"></sl-icon>
         Add Allergy</sl-button>
+
     <mb-context path="pdjallergy.v0/composer" />
     <mb-context path="pdjallergy.v0/language" />
     <mb-context path="pdjallergy.v0/territory" />
     <mb-submit class="mt-4">
+
         <sl-button size="medium" class="mt-4 w-full" type="neutral" {loading}>
             Submit
         </sl-button>
     </mb-submit>
 </mb-form>
+
