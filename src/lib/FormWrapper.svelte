@@ -13,9 +13,12 @@
     const handleSubmit = async (e: CustomEvent) => {
         const composition = e.detail;
         console.log({ composition });
+        
         try {
+            loading = true
             const config = JSON.parse($store);
             const { ehrscape: baseURL, username, password, ehrId } = config;
+            console.log(config);
             const ehrscape = axios.create({
                 baseURL,
                 auth: { username, password },
@@ -24,8 +27,10 @@
                 params: { format: "FLAT", templateId: id, ehrId },
             });
             console.log(response.data);
+            loading = false
             success.toast();
         } catch (e) {
+            loading = false
             console.error(e);
             failure.toast();
         }
