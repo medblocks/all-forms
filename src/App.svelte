@@ -1,17 +1,12 @@
 <script lang="ts">
   import "./index.css";
   import "medblocks-ui";
+  import "medblocks-ui/dist/shoelace";
+
   import { Router, Route } from "svelte-routing";
-  import "@shoelace-style/shoelace/dist/themes/light.css";
-  import "@shoelace-style/shoelace/dist/shoelace";
-  import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path";
   import Home from "./lib/Home.svelte";
   import { forms } from "./lib/FormList.svelte";
   import FormWrapper from "././lib/FormWrapper.svelte";
-  // Load icons directly from shoelace CDN
-  setBasePath(
-    "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.49/dist/"
-  );
 </script>
 
 <main class="p-5 md:p-12 flex flex-col gap-5">
