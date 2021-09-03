@@ -2,7 +2,7 @@
     import { fade } from "svelte/transition";
     export let loading;
 
-    let substance = {}
+    let substance = []
     let risks = 1;
 
 </script>
@@ -10,11 +10,8 @@
 <mb-form>
     {#each [...Array(risks)] as _, i}
     <div class="border shadow-lg p-5 rounded-lg flex flex-col gap-3 mt-5 md:p-10">
-        {#if i>0}
-        <div class="flex flex-row-reverse font-medium">
-           <sl-button type="danger" on:click={()=>{risks--;}}><sl-icon slot="prefix" name="dash-square-fill"></sl-icon>Delete Allergy</sl-button>
-        </div>
-        {/if}
+        
+        
         <mb-input
             path={`pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:${i}/substance`}
             label="Substance"
@@ -40,7 +37,7 @@
             </mb-select>
       
   
-            <mb-text-select 
+            <mb-text-select multiple
             path={`pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:${i}/reaction_event:0/manifestation:0`}
             label="Manifestation"
         >
@@ -89,6 +86,7 @@
 
     <sl-button type="primary" class="mt-5" on:click={()=>{risks++;}}><sl-icon slot="prefix" name="plus-square-fill"></sl-icon>
         Add Allergy</sl-button>
+    <sl-button type="danger" on:click={()=>{risks--;}}><sl-icon slot="prefix" name="dash-square-fill"></sl-icon>Delete Allergy</sl-button>
 
     <mb-context path="pdjallergy.v0/composer" />
     <mb-context path="pdjallergy.v0/language" />
