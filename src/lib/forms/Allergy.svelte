@@ -12,17 +12,17 @@
 <mb-form>
     {#each [...Array(risks)] as _, i}
     <div class="border shadow-lg p-5 rounded-lg flex flex-col gap-3 mt-5 md:p-10">
-        {#if i>0}
-        <div class="flex flex-row-reverse font-medium">
-           <sl-button type="danger" on:click={()=>{risks--;}}><sl-icon slot="prefix" name="dash-square-fill"></sl-icon>Delete Allergy</sl-button>
-        </div>
-        {/if}
         <mb-input
             path={`pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:${i}/substance`}
             label="Substance"
             required
             on:mb-input={(e)=>{e.target.data ? substance[i] = true : substance[i] = false}}
         />
+        {#if i>0}
+        <div class="flex flex-row-reverse font-medium">
+           <sl-button type="danger" on:click={()=>{risks--;}}><sl-icon slot="prefix" name="dash-square-fill"></sl-icon>Delete Allergy</sl-button>
+        </div>
+        {/if}
         <mb-date
             time
             path={`pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:${i}/onset_of_last_reaction`}
