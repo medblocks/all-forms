@@ -83,8 +83,9 @@
 
     <sl-button type="primary" class="mt-5" on:click={()=>{risks++;}}><sl-icon slot="prefix" name="plus-square-fill"></sl-icon>
         Add Allergy</sl-button>
-    <sl-button type="danger" on:click={()=>{risks--;}}><sl-icon slot="prefix" name="dash-square-fill"></sl-icon>Delete Allergy</sl-button>
-
+{#if risks>1}
+<sl-button type="danger" on:click={()=>{risks--;}}><sl-icon slot="prefix" name="dash-square-fill"></sl-icon>Delete Allergy</sl-button>
+{/if}
     <mb-context path="pdjallergy.v0/composer" />
     <mb-context path="pdjallergy.v0/language" />
     <mb-context path="pdjallergy.v0/territory" />
