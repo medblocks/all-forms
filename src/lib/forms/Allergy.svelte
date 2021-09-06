@@ -1,5 +1,7 @@
 <script lang="ts">
-    import { fade } from "svelte/transition";
+    import { slide} from "svelte/transition";
+    import { quintOut } from "svelte/easing";
+
     export let loading;
 
     let substance = []
@@ -24,7 +26,7 @@
             label="Onset of reaction"
         />
         {#if substance[i]}
-        <div class="flex flex-col gap-3" transition:fade>
+        <div class="flex flex-col gap-3" in:slide={{delay:40,duration:0,easing:quintOut}}>
             <mb-select
                 path={`pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:${i}/status`}
                 label="Status"
@@ -39,34 +41,29 @@
   
             <mb-text-select multiple
             path={`pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:${i}/reaction_event:0/manifestation:0`}
-            label="Manifestation"
-        >
-            <mb-option value="Rash" label="Rash" />
-            <mb-option value="Itching" label="Itching" />
-            <mb-option value="Sneezing" label="Sneezing" />
-            <mb-option value="Watering of eyes" label="Watering of eyes" />
-            <mb-option
-                value="Breathing difficulty"
-                label="Breathing difficulty"
-            />
-            <mb-option value="Anaphylaxis" label="Anaphylaxis" />
-        </mb-text-select>
-        <mb-select
-            path={`pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:${i}/reaction_event:0/severity_of_reaction`}
-            label="Severity of reaction"
-        >
-            <mb-option value="at0093" label="Mild" />
-            <mb-option value="at0092" label="Moderate" />
-            <mb-option value="at0090" label="Severe" />
-        </mb-select>
-           </div>
-     
+            label="Manifestation">
+                <mb-option value="Rash" label="Rash" />
+                <mb-option value="Itching" label="Itching" />
+                <mb-option value="Sneezing" label="Sneezing" />
+                <mb-option value="Watering of eyes" label="Watering of eyes" />
+                <mb-option
+                    value="Breathing difficulty"
+                    label="Breathing difficulty"/>
+                <mb-option value="Anaphylaxis" label="Anaphylaxis" />
+            </mb-text-select>
+            <mb-select
+                path={`pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:${i}/reaction_event:0/severity_of_reaction`}
+                label="Severity of reaction">
+                <mb-option value="at0093" label="Mild" />
+                <mb-option value="at0092" label="Moderate" />
+                <mb-option value="at0090" label="Severe" />
+            </mb-select>
+            
             <mb-input
-                path="pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:0/comment"
-                label="Comment"
-            />
-       
-{/if}
+            path="pdjallergy.v0/adverse_reaction_list/adverse_reaction_risk:0/comment"
+            label="Comment"/>
+        </div>
+        {/if}
         <div class="hidden">
             <mb-context path="pdjallergy.v0/category" />
             <mb-context path="pdjallergy.v0/context/start_time" />

@@ -1,6 +1,5 @@
 <script lang="ts" context="module">
     import { Link } from "svelte-routing";
-    import AnotherForm from "./forms/AnotherForm.svelte";
     import Allergy from "./forms/Allergy.svelte";
     export const forms: {
         name: string;
@@ -12,18 +11,14 @@
             name: "Allergy",
             id: "pdjallergy.vo",
             component: Allergy,
-            opt: "example.opt",
+            opt: "pdjallergy.vo.opt",
         },
-        {
-            name: "Another Form",
-            id: "another",
-            component: AnotherForm,
-            opt: "example.opt",
-        },
+        
     ];
 </script>
 
 <div>
+    
     {#each forms as form}
         <div class="bg-gray-100 flex p-3 m-3 border justify-between rounded-md">
             <Link class="font-medium" to={form.name.replaceAll(' ', '_')}>{form.name}</Link>
