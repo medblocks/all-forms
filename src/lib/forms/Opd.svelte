@@ -119,13 +119,15 @@
                 <mb-context path="opdvisitpdj.v0/history/family_history/encoding"></mb-context>
                 <mb-context path="opdvisitpdj.v0/history/family_history/subject"></mb-context>
                 <div class="flex flex-row-reverse font-medium">
-                    <sl-button on:click={(navigate.show("Examination"))}>
+                    <sl-button on:click={() => {navigate.show("Examination"); window.scrollTo(0,0)}}>
                         <sl-icon slot="suffix" name="arrow-right"></sl-icon>
                         Next
                     </sl-button>
                 </div>
             </div>
         </sl-tab-panel>
+
+
         <sl-tab-panel name="Examination">
             <div class="border shadow-lg p-5 rounded-lg flex flex-col gap-3 mt-5 md:p-10">
                 <p class="font-bold text-lg">Pulse Rate</p>
@@ -150,7 +152,7 @@
                 </div>
                 <p class="font-bold text-lg">Body Temperature</p>
                 <div class="ml-4 md:ml-6 lg:ml-8 flex flex-col gap-3">
-                    <mb-quantity default="Cel" path="opdvisitpdj.v0/examination_findings/vital_signs/body_temperature/temperature" label="Temperature">
+                    <mb-quantity default="[degF]" path="opdvisitpdj.v0/examination_findings/vital_signs/body_temperature/temperature" label="Temperature">
                         <mb-unit unit="Cel" label="Cel"></mb-unit>
                         <mb-unit unit="[degF]" label="[degF]"></mb-unit>
                     </mb-quantity>
@@ -169,7 +171,7 @@
                 <p class="font-bold text-lg">Physical Examination Findings</p>
                 <div class="ml-4 md:ml-6 lg:ml-8 flex flex-col gap-3">
                     <mb-checkbox path="opdvisitpdj.v0/examination_findings/physical_examination_findings/examination_findings/no_abnormality_detected" label="No abnormality detected"></mb-checkbox>
-                    <mb-input path="opdvisitpdj.v0/examination_findings/physical_examination_findings/examination_findings/clinical_description" label="Clinical description"></mb-input>
+                    <mb-input textarea path="opdvisitpdj.v0/examination_findings/physical_examination_findings/examination_findings/clinical_description" label="Clinical description"></mb-input>
                     <mb-input path="opdvisitpdj.v0/examination_findings/physical_examination_findings/interpretation" label="Interpretation"></mb-input>
                     <mb-input path="opdvisitpdj.v0/examination_findings/physical_examination_findings/comment" label="Comment"></mb-input>
                 </div>
@@ -198,13 +200,13 @@
                 </div>
                 <div class="flex">
                     <div class="w-full">
-                        <sl-button on:click={(navigate.show("History"))}>
+                        <sl-button on:click={() => {navigate.show("History"); window.scrollTo(0,0)}}>
                             <sl-icon slot="prefix" name="arrow-left"></sl-icon>
                             Back
                         </sl-button>
                     </div>
                     <div class="">
-                        <sl-button on:click={(navigate.show("Diagnosis"))}>
+                        <sl-button on:click={() => {navigate.show("Diagnosis"); window.scrollTo(0,0)}}>
                             <sl-icon slot="suffix" name="arrow-right"></sl-icon>
                             Next
                         </sl-button>
