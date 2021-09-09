@@ -45,10 +45,7 @@
                         <mb-checkbox path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/nil_significant`} label="Nil significant"></mb-checkbox>
                         
                         <p>Body Site</p>
-                        <Repeatable let:i={j} name="Body site">
-                        <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/body_site:${j}`}></mb-input>
-                        </Repeatable>
-            
+                        <mb-input-multiple placeholder="body site" path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/body_site`}></mb-input-multiple>
                         <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/description`} label="Description"></mb-input>
                         <mb-date time path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/episode_onset`} label="Episode onset"></mb-date>
             
@@ -184,7 +181,7 @@
                 <p class="font-bold text-lg">Problem/Diagnosis name</p>
                 <mb-input path="opdvisitpdj.v0/problem_diagnosis/problem_diagnosis_name"></mb-input>
                 <mb-input textarea path="opdvisitpdj.v0/problem_diagnosis/clinical_description" label="Clinical description"></mb-input>
-                <mb-input path="opdvisitpdj.v0/problem_diagnosis/body_site:0" label="Body site"></mb-input>
+                <mb-input-multiple placeholder="body site" path="opdvisitpdj.v0/problem_diagnosis/body_site" label="Body site"></mb-input-multiple>
                 <mb-date time path="opdvisitpdj.v0/problem_diagnosis/date_time_of_onset" label="Date/time of onset"></mb-date>
                 <mb-select path="opdvisitpdj.v0/problem_diagnosis/severity" label="Severity">
                     <mb-option value="at0047" label="Mild"></mb-option>
