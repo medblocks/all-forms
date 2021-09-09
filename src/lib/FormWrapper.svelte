@@ -9,6 +9,7 @@
     let loading = false;
     let success;
     let failure;
+    let warning;
 
     const handleSubmit = async (e: CustomEvent) => {
         const composition = e.detail;
@@ -17,18 +18,25 @@
         try {
             loading = true
             const config = JSON.parse($store);
-            const { ehrscape: baseURL, username, password, ehrId } = config;
-            console.log(config);
-            const ehrscape = axios.create({
-                baseURL,
-                auth: { username, password },
-            });
-            const response = await ehrscape.post("/composition", composition, {
-                params: { format: "FLAT", templateId: id, ehrId },
-            });
-            console.log(response.data);
-            loading = false
-            success.toast();
+            console.log(composition)
+            if (config){
+                const { ehrscape: baseURL, username, password, ehrId } = config;
+                console.log(config);
+                const ehrscape = axios.create({
+                    baseURL,
+                    auth: { username, password },
+                });
+                const response = await ehrscape.post("/composition", composition, {
+                    params: { format: "FLAT", templateId: id, ehrId },
+                });
+                console.log(response.data);
+                loading = false
+                success.toast();
+            }
+            else{
+                loading = false
+                warning.toast();
+            }
         } catch (e) {
             loading = false
             console.error(e);
@@ -50,4 +58,9 @@
         <strong>There was an error in saving the composition</strong><br />
         Please look at the console for more info
     </sl-alert>
+
+    <sl-alert type="warning" bind:this={warning} closable>
+        <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
+        <strong>Log the console. Update the config to post the data</strong><br>
+      </sl-alert>
 </div>

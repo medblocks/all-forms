@@ -1,10 +1,14 @@
 <script lang="ts">
+    import Repeatable from "../Repeatable.svelte";
     export let loading;
-    let symptom_sign = 1;
-    let body_site = {};
-    let modifying_factor = {};
     let family_member = 1;
     let navigate
+    let tabs={
+        "History" : "Examination",
+        "Examination":"Diagnosis",
+        "Diagnosis":"Orders",
+        "Orders":null
+    }
 </script>
 
 <mb-form ctx={{system_or_structure_examined:"Entire body"}}>
@@ -16,83 +20,61 @@
         <sl-tab slot="nav" panel="Orders">Orders</sl-tab>
     
         <sl-tab-panel name="History">
-            <div class="border shadow-lg p-5 rounded-lg flex flex-col gap-3 md:p-8">
-                <mb-context path="opdvisitpdj.v0/context/start_time"></mb-context>
-                <mb-context path="opdvisitpdj.v0/context/setting"></mb-context>
+            <div class="border shadow-lg p-5 rounded-lg flex flex-col gap-3 mt-5 md:p-10">
                 <p class="font-bold text-lg">Presenting problem</p>
                 
                 <mb-select path="opdvisitpdj.v0/reason_for_encounter/presenting_problem" multiple>
                     <mb-option value="386661006" label="Fever"></mb-option>
                     <mb-option value="25064002" label="Headache"></mb-option>
                 </mb-select>
-            
+                
                 <mb-input textarea path="opdvisitpdj.v0/history/story_history/story" label="Story"></mb-input>
-        
+                
                 <div>
+                    <mb-context path="opdvisitpdj.v0/context/start_time"></mb-context>
+                    <mb-context path="opdvisitpdj.v0/context/setting"></mb-context>
                     <mb-context path="opdvisitpdj.v0/reason_for_encounter/language"></mb-context>
                     <mb-context path="opdvisitpdj.v0/reason_for_encounter/encoding"></mb-context>
                     <mb-context path="opdvisitpdj.v0/reason_for_encounter/subject"></mb-context>
                 </div>
         
-                {#each [...Array(symptom_sign)] as _, i}
-                <p class="font-bold text-lg">Symptom</p>
-                <div class="ml-4 md:ml-6 lg:ml-8 flex flex-col gap-3">
-                    <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/symptoms`} label="Name" required></mb-input>
-                    <mb-checkbox path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/nil_significant`} label="Nil significant"></mb-checkbox>
-                    
-                    <p>Body Site</p>
-                    {#each [...Array(body_site[i] || 1)] as _, j}
-                    <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/body_site:${j}`}></mb-input>
-                    {/each}
-                    <div>
-                        <sl-button type="neutral" class="mt-2" on:click={()=>{
-                            body_site = {...body_site,[i]:body_site[i]?body_site[i]+1:2}}}><sl-icon slot="prefix" name="plus-square-fill"></sl-icon>Add Body site</sl-button>
-                        {#if body_site[i]>1}
-                        <sl-button on:click={()=>{
-                            body_site = {...body_site,[i]:body_site[i]-1}}}><sl-icon slot="prefix" name="dash-square-fill"></sl-icon>Delete Body site</sl-button>
-                        {/if}
-                    </div>
-        
-                    <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/description`} label="Description"></mb-input>
-                    <mb-date time path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/episode_onset`} label="Episode onset"></mb-date>
-        
-                    <mb-select path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/progression`} label="Progression">
-                        <mb-option value="at0183" label="Worsening"></mb-option>
-                        <mb-option value="at0182" label="Unchanged"></mb-option>
-                        <mb-option value="at0181" label="Improving"></mb-option>
-                        <mb-option value="at0184" label="Resolved"></mb-option>
-                    </mb-select>
-        
-                    <p class="font-semibold">Modifying Factor</p>
-                    {#each [...Array(modifying_factor[i] || 1)] as _, k}
-                    <div class="border shadow-md rounded-lg flex flex-col gap-3 p-4">
-                        <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/modifying_factor:${k}/factor`} label="Factor"></mb-input>
-                        <mb-select path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/modifying_factor:${k}/effect`} label="Effect">
-                            <mb-option value="at0159" label="Relieves"></mb-option>
-                            <mb-option value="at0156" label="No effect"></mb-option>
-                            <mb-option value="at0158" label="Worsens"></mb-option>
+                <Repeatable let:i name="Symptom/Sign">
+                    <p class="font-bold text-lg">Symptom</p>
+                    <div class="ml-4 md:ml-6 lg:ml-8 flex flex-col gap-3">
+                        <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/symptoms`} label="Name"></mb-input>
+                        <mb-checkbox path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/nil_significant`} label="Nil significant"></mb-checkbox>
+                        
+                        <p>Body Site</p>
+                        <Repeatable let:i={j} name="Body site">
+                        <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/body_site:${j}`}></mb-input>
+                        </Repeatable>
+            
+                        <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/description`} label="Description"></mb-input>
+                        <mb-date time path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/episode_onset`} label="Episode onset"></mb-date>
+            
+                        <mb-select path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/progression`} label="Progression">
+                            <mb-option value="at0183" label="Worsening"></mb-option>
+                            <mb-option value="at0182" label="Unchanged"></mb-option>
+                            <mb-option value="at0181" label="Improving"></mb-option>
+                            <mb-option value="at0184" label="Resolved"></mb-option>
                         </mb-select>
+            
+                        <p class="font-semibold">Modifying Factor</p>
+                        <Repeatable let:i={k} name="Modifying Factor">
+                        <div class="border shadow-md rounded-lg flex flex-col gap-3 p-4">
+                            <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/modifying_factor:${k}/factor`} label="Factor"></mb-input>
+                            <mb-select path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/modifying_factor:${k}/effect`} label="Effect">
+                                <mb-option value="at0159" label="Relieves"></mb-option>
+                                <mb-option value="at0156" label="No effect"></mb-option>
+                                <mb-option value="at0158" label="Worsens"></mb-option>
+                            </mb-select>
+                        </div>
+                        </Repeatable>
+
+                        <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/comment`} label="Comment"></mb-input>
+                        <p class="border-b-2 border-gray-300 mt-2"></p>
                     </div>
-                    {/each}
-                    <div>
-                        <sl-button type="neutral" class="mt-2" on:click={()=>{
-                            modifying_factor = {...modifying_factor,[i]:modifying_factor[i]?modifying_factor[i]+1:2}}}><sl-icon slot="prefix" name="plus-square-fill"></sl-icon>Add Modifying Factor</sl-button>
-                        {#if modifying_factor[i]>1}
-                        <sl-button on:click={()=>{
-                            modifying_factor = {...modifying_factor,[i]:modifying_factor[i]-1}}}><sl-icon slot="prefix" name="dash-square-fill"></sl-icon>Delete Modifying Factor</sl-button>
-                        {/if}
-                    </div>
-                    <mb-input path={`opdvisitpdj.v0/history/story_history/symptom_sign:${i}/comment`} label="Comment"></mb-input>
-                    <p class="border-b-2 border-gray-300 mt-2"></p>
-                </div>
-                    {/each}
-                    <div>
-                        <sl-button type="neutral" class="mt-2" on:click={()=>{symptom_sign++;}}><sl-icon slot="prefix" name="plus-square-fill"></sl-icon>Add Symptom/Sign</sl-button>
-                        {#if symptom_sign>1}
-                        <sl-button on:click={()=>{symptom_sign--;}}><sl-icon slot="prefix" name="dash-square-fill"></sl-icon>Delete Symptom/Sign</sl-button>
-                        {/if}
-                    </div>
-                
+                </Repeatable>
         
                 <div>
                     <mb-context path="opdvisitpdj.v0/history/story_history/time"></mb-context>
@@ -118,12 +100,6 @@
                 <mb-context path="opdvisitpdj.v0/history/family_history/language"></mb-context>
                 <mb-context path="opdvisitpdj.v0/history/family_history/encoding"></mb-context>
                 <mb-context path="opdvisitpdj.v0/history/family_history/subject"></mb-context>
-                <div class="flex flex-row-reverse font-medium">
-                    <sl-button on:click={() => {navigate.show("Examination"); window.scrollTo(0,0)}}>
-                        <sl-icon slot="suffix" name="arrow-right"></sl-icon>
-                        Next
-                    </sl-button>
-                </div>
             </div>
         </sl-tab-panel>
 
@@ -198,30 +174,71 @@
                     <mb-context path="opdvisitpdj.v0/examination_findings/physical_examination_findings/encoding"></mb-context>
                     <mb-context path="opdvisitpdj.v0/examination_findings/physical_examination_findings/subject"></mb-context>
                 </div>
-                <div class="flex">
-                    <div class="w-full">
-                        <sl-button on:click={() => {navigate.show("History"); window.scrollTo(0,0)}}>
-                            <sl-icon slot="prefix" name="arrow-left"></sl-icon>
-                            Back
-                        </sl-button>
-                    </div>
-                    <div class="">
-                        <sl-button on:click={() => {navigate.show("Diagnosis"); window.scrollTo(0,0)}}>
-                            <sl-icon slot="suffix" name="arrow-right"></sl-icon>
-                            Next
-                        </sl-button>
-                    </div>
-                </div>
             </div>
             
         </sl-tab-panel>
-        <sl-tab-panel name="Diagnosis">Diagnosis</sl-tab-panel>
+
+
+        <sl-tab-panel name="Diagnosis">
+            <div class="border shadow-lg p-5 rounded-lg flex flex-col gap-3 mt-5 md:p-10">
+                <p class="font-bold text-lg">Problem/Diagnosis name</p>
+                <mb-input path="opdvisitpdj.v0/problem_diagnosis/problem_diagnosis_name"></mb-input>
+                <mb-input textarea path="opdvisitpdj.v0/problem_diagnosis/clinical_description" label="Clinical description"></mb-input>
+                <mb-input path="opdvisitpdj.v0/problem_diagnosis/body_site:0" label="Body site"></mb-input>
+                <mb-date time path="opdvisitpdj.v0/problem_diagnosis/date_time_of_onset" label="Date/time of onset"></mb-date>
+                <mb-select path="opdvisitpdj.v0/problem_diagnosis/severity" label="Severity">
+                    <mb-option value="at0047" label="Mild"></mb-option>
+                    <mb-option value="at0048" label="Moderate"></mb-option>
+                    <mb-option value="at0049" label="Severe"></mb-option>
+                </mb-select>
+                <mb-input path="opdvisitpdj.v0/problem_diagnosis/course_description" label="Course description"></mb-input>
+                <mb-date time path="opdvisitpdj.v0/problem_diagnosis/date_time_of_resolution" label="Date/time of resolution"></mb-date>
+                <mb-select path="opdvisitpdj.v0/problem_diagnosis/diagnostic_certainty" label="Diagnostic certainty"> 
+                    <mb-option value="at0074" label="Suspected"></mb-option>
+                    <mb-option value="at0075" label="Probable"></mb-option>
+                    <mb-option value="at0076" label="Confirmed"></mb-option>
+                </mb-select>
+                <mb-input path="opdvisitpdj.v0/problem_diagnosis/comment" label="Comment"></mb-input>
+                <!-- <mb-date time path="opdvisitpdj.v0/problem_diagnosis/last_updated" label="Last updated"></mb-date> -->
+                <mb-context path="opdvisitpdj.v0/problem_diagnosis/language"></mb-context>
+                <mb-context path="opdvisitpdj.v0/problem_diagnosis/encoding"></mb-context>
+                <mb-context path="opdvisitpdj.v0/problem_diagnosis/subject"></mb-context>
+            </div>
+        </sl-tab-panel>
+
         <sl-tab-panel name="Orders">Orders</sl-tab-panel>
     </sl-tab-group>
     <mb-context path="opdvisitpdj.v0/category"></mb-context>
     <mb-context path="opdvisitpdj.v0/language"></mb-context>
     <mb-context path="opdvisitpdj.v0/territory"></mb-context>
     <mb-context path="opdvisitpdj.v0/composer"></mb-context>
+
+    <div class="flex">
+        <div class="w-full">
+            <sl-button on:click={() => {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+                let previous_tab = navigate.activeTab.previousElementSibling?.panel
+                navigate.show(previous_tab)}
+            }>
+                <sl-icon slot="prefix" name="arrow-left"></sl-icon>
+                Back
+            </sl-button>
+        </div>
+        <div>
+            <sl-button on:click={() => {
+                setTimeout(()=>{
+                    window.scrollTo({top: 0, behavior:'smooth'});
+                },50)
+                let next_tab = tabs[navigate.activeTab.panel]
+                navigate.show(next_tab)
+            }
+            }>
+                <sl-icon slot="suffix" name="arrow-right"></sl-icon>
+                Next
+            </sl-button>
+        </div>
+    </div>
+
     <mb-submit class="mt-4">
         <sl-button size="medium" class="mt-4 w-full" type="neutral" {loading}>
             Submit
