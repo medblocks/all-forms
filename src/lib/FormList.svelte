@@ -2,6 +2,7 @@
     import { Link } from "svelte-routing";
     import AnotherForm from "./forms/AnotherForm.svelte";
     import Allergy from "./forms/Allergy.svelte";
+import PeteTest from "./forms/PeteTest.svelte";
     export const forms: {
         name: string;
         id: string;
@@ -15,10 +16,10 @@
             opt: "example.opt",
         },
         {
-            name: "Another Form",
-            id: "another",
-            component: AnotherForm,
-            opt: "example.opt",
+            name: "Pete Test",
+            id: "petetest",
+            component: PeteTest,
+            opt: "petetest.opt",
         },
     ];
 </script>
