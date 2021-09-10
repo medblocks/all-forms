@@ -1,6 +1,7 @@
 <script lang="ts" context="module">
     import { Link } from "svelte-routing";
     import Allergy from "./forms/Allergy.svelte";
+import BloodPressure from "./forms/BloodPressure.svelte";
     import Opd from "./forms/Opd.svelte";
     export const forms: {
         name: string;
@@ -20,6 +21,12 @@
             component: Opd,
             opt: "opdvisitpdj.v0.opt",
         },
+        {
+            name: 'Blood Pressure',
+            id: 'petetest',
+            component: BloodPressure,
+            opt: "petetest.opt"
+        }
     ];
 </script>
 
