@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "medblocks-ui": "^0.0.62",
+    "medblocks-ui": "0.0.65",
     "svelte-routing": "^1.6.0"
   }
 }
