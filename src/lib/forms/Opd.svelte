@@ -23,10 +23,9 @@
             <div class="border shadow-lg p-5 rounded-lg flex flex-col gap-3 mt-5 md:p-10">
                 <p class="font-bold text-lg">Presenting problem</p>
                 
-                <mb-select path="opdvisitpdj.v0/reason_for_encounter/presenting_problem" multiple>
-                    <mb-option value="386661006" label="Fever"></mb-option>
-                    <mb-option value="25064002" label="Headache"></mb-option>
-                </mb-select>
+                <mb-search path="opdvisitpdj.v0/reason_for_encounter/presenting_problem" hits={5}>
+                    <mb-filter value="<404684003" label="Clinical Findings" />
+                </mb-search>
                 
                 <mb-input textarea path="opdvisitpdj.v0/history/story_history/story" label="Story"></mb-input>
                 
