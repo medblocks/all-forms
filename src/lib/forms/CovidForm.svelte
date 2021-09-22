@@ -494,6 +494,9 @@
       </div>
     </sl-tab-panel>
   </sl-tab-group>
+  <mb-context path="covid.form.v1/composer" />
+  <mb-context path="covid.form.v1/language" />
+  <mb-context path="covid.form.v1/territory" />
   <mb-submit>
     <sl-button type="neutral">Submit</sl-button>
   </mb-submit>
