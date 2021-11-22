@@ -48,7 +48,7 @@
     };
 
     const hermes = axios.create({
-        baseURL: "https://drx.eastus.cloudapp.azure.com/v1",
+        baseURL: "https://hermes-2-kbsdxvq3bq-el.a.run.app/v1",
     });
 
     const handleDependencyInjection = (e: CustomEvent) => {

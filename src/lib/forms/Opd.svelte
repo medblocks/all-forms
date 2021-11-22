@@ -6,8 +6,7 @@
     let tabs={
         "History" : "Examination",
         "Examination":"Diagnosis",
-        "Diagnosis":"Orders",
-        "Orders":null
+        "Diagnosis":null
     }
 </script>
 
@@ -17,14 +16,14 @@
         <sl-tab slot="nav" panel="History">History</sl-tab>
         <sl-tab slot="nav" panel="Examination">Examination</sl-tab>
         <sl-tab slot="nav" panel="Diagnosis">Diagnosis</sl-tab>
-        <sl-tab slot="nav" panel="Orders">Orders</sl-tab>
     
         <sl-tab-panel name="History">
             <div class="border shadow-lg p-5 rounded-lg flex flex-col gap-3 mt-5 md:p-10">
                 <p class="font-bold text-lg">Presenting problem</p>
                 
                 <mb-search path="opdvisitpdj.v0/reason_for_encounter/presenting_problem" hits={5}>
-                    <mb-filter value="<404684003" label="Clinical Findings" />
+                    <mb-filter value="^181000271107" label="Findings" />
+                    <mb-filter value="<272379006 | Event (event) |" label="Events"></mb-filter>
                 </mb-search>
                 
                 <mb-input textarea path="opdvisitpdj.v0/history/story_history/story" label="Story"></mb-input>
@@ -201,8 +200,6 @@
                 <mb-context path="opdvisitpdj.v0/problem_diagnosis/subject"></mb-context>
             </div>
         </sl-tab-panel>
-
-        <sl-tab-panel name="Orders">Orders</sl-tab-panel>
     </sl-tab-group>
     <mb-context path="opdvisitpdj.v0/category"></mb-context>
     <mb-context path="opdvisitpdj.v0/language"></mb-context>
