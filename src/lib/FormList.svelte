@@ -4,6 +4,8 @@
     import BloodPressure from "./forms/BloodPressure.svelte";
     import CovidForm from "./forms/CovidForm.svelte";
     import Opd from "./forms/Opd.svelte";
+    import BodyTemperatureCheck from "./forms/body_temperature_check.svelte";
+
     export const forms: {
         name: string;
         id: string;
@@ -33,6 +35,12 @@
             id: 'covid.form.v1',
             component: CovidForm,
             opt: "covid.form.v1.opt"
+        },
+        {
+            name: 'Body Temperature check',
+            id: 'body_temperature_check.v0',
+            component: BodyTemperatureCheck,
+            opt: "body_temperature_check.v0.opt"
         }
     ];
 </script>
