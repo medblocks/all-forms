@@ -18,10 +18,9 @@
         try {
             loading = true;
             const config = JSON.parse($store);
-            console.log(composition);
+            console.log(config);
             if (config) {
                 const { ehrscape: baseURL, username, password, ehrId } = config;
-                console.log(config);
                 const ehrscape = axios.create({
                     baseURL,
                     auth: { username, password },

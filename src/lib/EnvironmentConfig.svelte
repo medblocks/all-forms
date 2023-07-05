@@ -14,9 +14,11 @@
         } = JSON.parse($store) ?? {});
     });
     const save = () => {
+        console.log('Saving variables...');
         try {
             store.setLocal(JSON.stringify({ openehr, ehrscape, username, password, ehrId }))
             success.toast();
+            console.log('Saved.');
         } catch (e) {
             failure.toast();
             console.error(e);
