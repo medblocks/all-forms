@@ -6,6 +6,22 @@ This template should help get you started developing with Svelte and TypeScript 
 
 [VSCode](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
+## Installation 
+ 
+Alternative way to install is via docker-compose and provided `docker-compose.yml` file.
+Installation is simple just run:
+```bash
+docker-compose run --rm node npm ci
+```
+A new directory will be created /node_packages with owner uid 1000 (configurable in docker-compose).
+
+In order to run the application you just need to:
+```bash
+docker-compose up
+```
+and navigate to [http://localhost:3000/](http://localhost:3000/).
+
+
 ## Need an official Svelte framework?
 
 Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
