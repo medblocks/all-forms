@@ -14,9 +14,11 @@
         } = JSON.parse($store) ?? {});
     });
     const save = () => {
+        console.log('Saving variables...');
         try {
             store.setLocal(JSON.stringify({ openehr, ehrscape, username, password, ehrId }))
             success.toast();
+            console.log('Saved.');
         } catch (e) {
             failure.toast();
             console.error(e);
@@ -24,9 +26,9 @@
     };
 </script>
 
-<div>
+<div on:mb-submit={save}>
     <p class="text-2xl text-gray-600 mb-3">Environment Variables</p>
-    <sl-form on:sl-submit|preventDefault={save}>
+    <mb-form>
         <div class="flex flex-col gap-3 shadow-lg border-t p-6 rounded-lg">
             <sl-input
                 label="openEHR REST API"
@@ -72,9 +74,11 @@
                 type="password"
                 toggle-password
             />
-            <sl-button submit type="success">Save</sl-button>
+            <mb-submit>
+                <sl-button>Save</sl-button>
+            </mb-submit>
         </div>
-    </sl-form>
+    </mb-form>
     <sl-alert bind:this={success} type="success" duration="3000" closable>
         <sl-icon slot="icon" name="check2-circle" />
         <strong>Your changes have been saved</strong><br />
