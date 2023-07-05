@@ -1,3 +1,7 @@
+<script lang="ts">
+    export let loading;
+</script>
+
 <mb-form class="flex flex-col gap-3 p-5 shadow-lg rounded-lg border">
     <mb-context path="petetest/category" />
     <mb-context path="petetest/context/start_time" />
@@ -26,6 +30,6 @@
     <mb-context path="petetest/territory" />
     
     <mb-submit>
-        <sl-button type="neutral">Submit</sl-button>
+        <sl-button type="neutral" {loading}>Submit</sl-button>
     </mb-submit>
 </mb-form>
